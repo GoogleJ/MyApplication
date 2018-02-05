@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/HenCoderPractice1/HenCoderPractice1.iml" filepath="$PROJECT_DIR$/HenCoderPractice1/HenCoderPractice1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyApplication.iml" filepath="$PROJECT_DIR$/MyApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fileprovider/fileprovider.iml" filepath="$PROJECT_DIR$/fileprovider/fileprovider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/headerlistview/headerlistview.iml" filepath="$PROJECT_DIR$/headerlistview/headerlistview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rxJavaExamples/rxJavaExamples.iml" filepath="$PROJECT_DIR$/rxJavaExamples/rxJavaExamples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/stick/stick.iml" filepath="$PROJECT_DIR$/stick/stick.iml" />
+    </modules>
+  </component>
+</project>
