@@ -1,0 +1,72 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/cx"
+        android:shortcutDisabledMessage="@string/label5"
+        android:shortcutId="search"
+        android:shortcutLongLabel="@string/label4"
+        android:shortcutShortLabel="@string/label4"
+        tools:targetApi="n_mr1">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.example.headerlistview.ui.MainActivity"
+            android:targetPackage="com.example.headerlistview.ui" />
+        <categories android:name="android.shortcut.conversation" />
+
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/cv"
+        android:shortcutDisabledMessage="@string/label5"
+        android:shortcutId="observe"
+        android:shortcutLongLabel="@string/label3"
+        android:shortcutShortLabel="@string/label3"
+        tools:targetApi="n_mr1">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.example.headerlistview.ui.Main2Activity"
+            android:targetPackage="com.example.headerlistview.ui" />
+        <categories android:name="android.shortcut.conversation" />
+
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/cw"
+        android:shortcutDisabledMessage="@string/label5"
+        android:shortcutId="identify"
+        android:shortcutLongLabel="@string/label2"
+        android:shortcutShortLabel="@string/label2"
+        tools:targetApi="n_mr1">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.example.headerlistview.ui.Main3Activity"
+            android:targetPackage="com.example.headerlistview.ui" />
+        <categories android:name="android.shortcut.conversation" />
+
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/cy"
+        android:shortcutDisabledMessage="@string/label5"
+        android:shortcutId="wifi"
+        android:shortcutLongLabel="@string/label1"
+        android:shortcutShortLabel="@string/label1"
+        tools:targetApi="n_mr1">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.example.headerlistview.ui.Main4Activity"
+            android:targetPackage="com.example.headerlistview.ui" />
+        <categories android:name="android.shortcut.conversation" />
+
+    </shortcut>
+
+</shortcuts>

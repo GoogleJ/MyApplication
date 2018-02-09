@@ -10,12 +10,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.MainActivity">
+            <intent-filter>
+                <category android:name="android.shortcut.conversation" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+        <activity android:name=".ui.Main2Activity">
+            <intent-filter>
+                <category android:name="android.shortcut.conversation" />
+            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".ui.Main3Activity">
+            <intent-filter>
+                <category android:name="android.shortcut.conversation" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.Main4Activity">
+            <intent-filter>
+                <category android:name="android.shortcut.conversation" />
             </intent-filter>
         </activity>
     </application>

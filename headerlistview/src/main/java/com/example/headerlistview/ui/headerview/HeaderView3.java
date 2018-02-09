@@ -1,26 +1,42 @@
 package com.example.headerlistview.ui.headerview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.headerlistview.R;
 
+import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.buildins.UIUtil;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
+
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Administrator on 2018/1/29.
  */
 
-public class HeaderView3 implements View.OnClickListener {
+public class HeaderView3 {
     private View view;
 
-    private TextView tv_faketab1;
-    private TextView tv_faketab2;
-    private TextView tv_faketab3;
-    private TextView tv_faketab4;
-
     private Context context;
+
+    private MagicIndicator main_faketab;
+
+    private String[] title = {"推荐", "视频", "圈子", "购物"};
+
+    private List<String> titles = Arrays.asList(title);
 
     public HeaderView3(Context context) {
         this.context = context;
@@ -30,16 +46,6 @@ public class HeaderView3 implements View.OnClickListener {
     private void getView() {
         if (view == null) {
             view = View.inflate(context, R.layout.main_header3, null);
-
-            tv_faketab1 = view.findViewById(R.id.tv_faketab1);
-            tv_faketab2 = view.findViewById(R.id.tv_faketab2);
-            tv_faketab3 = view.findViewById(R.id.tv_faketab3);
-            tv_faketab4 = view.findViewById(R.id.tv_faketab4);
-
-            tv_faketab1.setOnClickListener(this);
-            tv_faketab2.setOnClickListener(this);
-            tv_faketab3.setOnClickListener(this);
-            tv_faketab4.setOnClickListener(this);
         }
     }
 
@@ -50,21 +56,4 @@ public class HeaderView3 implements View.OnClickListener {
         return null;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_faketab1:
-                Toast.makeText(context, "tv_faketab1", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.tv_faketab2:
-                Toast.makeText(context, "tv_faketab2", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.tv_faketab3:
-                Toast.makeText(context, "tv_faketab3", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.tv_faketab4:
-                Toast.makeText(context, "tv_faketab4", Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }
 }

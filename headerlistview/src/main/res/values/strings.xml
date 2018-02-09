@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">HeaderListView</string>
+
+    <string name="label1">Wi-Fi助手</string>
+    <string name="label2">识你所见</string>
+    <string name="label3">查看书签</string>
+    <string name="label4">快速搜索</string>
+    <string name="label5">出错了</string>
 </resources>
