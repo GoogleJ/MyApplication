@@ -1,16 +1,12 @@
 package com.example.headerlistview.ui.headerview;
 
 import android.app.Activity;
-import android.content.Context;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.headerlistview.R;
-import com.example.headerlistview.util.DistanceUtil;
 
 /**
  * Created by Administrator on 2018/1/29.

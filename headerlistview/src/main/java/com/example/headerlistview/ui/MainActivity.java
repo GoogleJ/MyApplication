@@ -1,6 +1,7 @@
 package com.example.headerlistview.ui;
 
 import android.animation.ArgbEvaluator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -13,19 +14,24 @@ import android.view.animation.Interpolator;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.AbsListView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.headerlistview.APP;
 import com.example.headerlistview.ui.headerview.HeaderView1;
 import com.example.headerlistview.ui.headerview.HeaderView2;
 import com.example.headerlistview.ui.headerview.HeaderView3;
 import com.example.headerlistview.R;
 import com.example.headerlistview.adapter.main.MainListAdapter;
+import com.example.headerlistview.ui.showpage.ShowPagesActivity;
 import com.example.headerlistview.ui.widget.MainList;
 import com.example.headerlistview.util.DistanceUtil;
 import com.example.headerlistview.util.SystemUtil;
+
+import net.lucode.hackware.magicindicator.MagicIndicator;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private MainList list;
@@ -44,11 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private LinearLayout realsearch;
     private LinearLayout realtab;
-
-    private TextView tv_realtab1;
-    private TextView tv_realtab2;
-    private TextView tv_realtab3;
-    private TextView tv_realtab4;
+    private MagicIndicator magic_realtab;
 
     //记录第一次显示需要滑动的最大距离
     private int firstScrollDistance;
@@ -77,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        APP.pages.add(findViewById(R.id.main_root));
 
         SystemUtil.changeStatusBarColor(this, getResources().getColor(R.color.colorfake));
 
@@ -251,16 +255,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         realsearch.setOnClickListener(this);
 
         realtab = findViewById(R.id.realtab);
-        tv_realtab1 = findViewById(R.id.tv_realtab1);
-        tv_realtab2 = findViewById(R.id.tv_realtab2);
-        tv_realtab3 = findViewById(R.id.tv_realtab3);
-        tv_realtab4 = findViewById(R.id.tv_realtab4);
-        tv_realtab1.setOnClickListener(this);
-        tv_realtab2.setOnClickListener(this);
-        tv_realtab3.setOnClickListener(this);
-        tv_realtab4.setOnClickListener(this);
+
+        magic_realtab = findViewById(R.id.magic_realtab);
 
         list = findViewById(R.id.list);
+
         header1 = new HeaderView1(this);
         header2 = new HeaderView2(this);
         header3 = new HeaderView3(this);
@@ -268,7 +267,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         list.addHeaderView(header2.getHeaderView());
         list.addHeaderView(header3.getHeaderView());
 
-        list.setAdapter(new MainListAdapter(getFragmentManager(), getIntent().getIntExtra("topheight", 0)));
+        MainListAdapter mainListAdapter = new MainListAdapter(getFragmentManager(), getIntent().getIntExtra("topheight", 0), header3.getTab(), magic_realtab);
+
+        mainListAdapter.setOnPageChange(new MainListAdapter.OnPageChange() {
+            @Override
+            public void onPageChange() {
+                if (list.getFirstVisiblePosition() != 2) {
+                    list.smoothScrollToPositionFromTop(2, 0);
+                }
+            }
+        });
+
+        list.setAdapter(mainListAdapter);
     }
 
     @Override
@@ -298,22 +308,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.iv_tab5:
                 Toast.makeText(getApplicationContext(), "tab5", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.tv_realtab1:
-                Toast.makeText(getApplicationContext(), "realtab1", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.tv_realtab2:
-                Toast.makeText(getApplicationContext(), "realtab2", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.tv_realtab3:
-                Toast.makeText(getApplicationContext(), "realtab3", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.tv_realtab4:
-                Toast.makeText(getApplicationContext(), "realtab4", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.realsearch:
                 Toast.makeText(getApplicationContext(), "search", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    public void showPages(View view) {
+        startActivity(new Intent(this, ShowPagesActivity.class));
     }
 
     @Override

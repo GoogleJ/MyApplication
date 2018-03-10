@@ -31,8 +31,9 @@ public class RecommendFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         adapter = new MainRecommendAdapter(data);
 
-        listView = new ListView(getContext());
+        listView = new ListView(getActivity());
         listView.setDivider(null);
+        listView.setScrollBarSize(0);
         listView.setAdapter(adapter);
 
         return listView;

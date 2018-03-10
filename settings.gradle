@@ -1,1 +1,1 @@
-include ':app', ':app', ':fileprovider', ':headerlistview', 'HenCoderPractice1', 'rxJavaExamples', 'stick', ':appgg', ':magicindicator'
+include ':fileprovider', ':headerlistview', ':temp1', 'HenCoderPractice1', 'rxJavaExamples', ':magicindicator'

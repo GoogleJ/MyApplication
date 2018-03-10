@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp">
+
+    <LinearLayout
+        android:id="@+id/ll_item_root"
+        android:layout_width="400dp"
+        android:layout_height="544dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/shape_temp"
+        android:elevation="6dp"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_item_siteicon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/icon_baidu" />
+
+            <TextView
+                android:id="@+id/tv_item_sitetitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_toRightOf="@id/iv_item_siteicon"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="【装机求助】如何短接Z170主板"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/icon_delete" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_item_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/shape_temp1" />
+
+    </LinearLayout>
+
+</RelativeLayout>

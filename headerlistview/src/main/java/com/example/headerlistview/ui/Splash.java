@@ -1,11 +1,8 @@
 package com.example.headerlistview.ui;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.example.headerlistview.R;
@@ -48,8 +45,8 @@ public class Splash extends AppCompatActivity {
             ll_splash_top.post(new Runnable() {
                 @Override
                 public void run() {
-                    SPUtil.putInt(SPUtil.TOP_HEIGHT, ll_splash_top.getHeight());
-                    intent.putExtra("topheight", ll_splash_top.getHeight());
+                    SPUtil.putInt(SPUtil.TOP_HEIGHT, ll_splash_top.getHeight() + DistanceUtil.dip2px(Splash.this, 32.1f));
+                    intent.putExtra("topheight", ll_splash_top.getHeight() + DistanceUtil.dip2px(Splash.this, 32.1f));
                     startActivity(intent);
                     finish();
                 }

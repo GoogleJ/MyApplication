@@ -3,6 +3,7 @@ package com.example.headerlistview.ui.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.ViewConfiguration;
 import android.widget.ListView;
 
 /**

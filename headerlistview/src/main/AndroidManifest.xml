@@ -30,11 +30,6 @@
             <intent-filter>
                 <category android:name="android.shortcut.conversation" />
             </intent-filter>
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
         </activity>
         <activity android:name=".ui.Main3Activity">
             <intent-filter>
@@ -46,6 +41,9 @@
                 <category android:name="android.shortcut.conversation" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.showpage.ShowPagesActivity"
+            android:launchMode="singleInstance" />
     </application>
 
 </manifest>
