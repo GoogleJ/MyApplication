@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.atest.widget.Tab xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_tab_title"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:background="#ffffff">
+
+        <TextView
+            android:id="@+id/tv_tab_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:drawableLeft="@drawable/ic_home_grey_300_24dp"
+            android:gravity="center"
+            android:text="title"
+            android:textColor="#000000" />
+
+        <ImageView
+            android:id="@+id/iv_tab_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_delete_green_a200_24dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#d0d0d0" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_tab_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_tab_title" />
+
+</com.example.atest.widget.Tab>
