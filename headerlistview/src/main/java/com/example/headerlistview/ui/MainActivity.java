@@ -14,7 +14,6 @@ import android.view.animation.Interpolator;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.AbsListView;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -45,8 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView tab4;
     private ImageView tab5;
     private TextView tv_main_pagecount;
-
-    private int pageCount; //打开的网页数
 
     private LinearLayout realsearch;
     private LinearLayout realtab;
@@ -135,16 +132,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                         if (scrollY >= secondScrollDistance) {
                             if (!secondAttach) {
-                                secondAttach = true;
                                 list.isIntercept = false;
+                                secondAttach = true;
                                 realtab.setVisibility(View.VISIBLE);
                                 tab2.setImageResource(R.drawable.refresh);
                                 tab2.setAlpha(1f);
                             }
                         } else if (scrollY < secondScrollDistance) {
                             if (secondAttach) {
-                                secondAttach = false;
                                 list.isIntercept = true;
+                                secondAttach = false;
                                 realtab.setVisibility(View.GONE);
                                 Animation animation = tab2.getAnimation();
                                 if (animation != null && !animation.hasEnded()) {
@@ -237,6 +234,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    private MainListAdapter mainListAdapter;
+
     private void initView() {
         tab1 = findViewById(R.id.iv_tab1);
         tab2 = findViewById(R.id.iv_tab2);
@@ -267,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         list.addHeaderView(header2.getHeaderView());
         list.addHeaderView(header3.getHeaderView());
 
-        MainListAdapter mainListAdapter = new MainListAdapter(getFragmentManager(), getIntent().getIntExtra("topheight", 0), header3.getTab(), magic_realtab);
+        mainListAdapter = new MainListAdapter(getFragmentManager(), getIntent().getIntExtra("topheight", 0), header3.getTab(), magic_realtab);
 
         mainListAdapter.setOnPageChange(new MainListAdapter.OnPageChange() {
             @Override
@@ -303,7 +302,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(), "tab3", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_tab4:
-                Toast.makeText(getApplicationContext(), "tab4", Toast.LENGTH_SHORT).show();
+                list.smoothScrollToPosition(0);
+                list.isIntercept = true;
                 break;
             case R.id.iv_tab5:
                 Toast.makeText(getApplicationContext(), "tab5", Toast.LENGTH_SHORT).show();

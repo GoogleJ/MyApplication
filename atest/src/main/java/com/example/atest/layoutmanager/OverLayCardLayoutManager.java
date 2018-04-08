@@ -1,5 +1,6 @@
 package com.example.atest.layoutmanager;
 
+import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -133,9 +134,25 @@ public class OverLayCardLayoutManager extends RecyclerView.LayoutManager {
             layoutDecorated(view, 0, offsetY - DistanceUtil.dip2px(32), DistanceUtil.getDisplayMetrics().widthPixels
                     , offsetY + viewHeight);
 
-//            view.setScaleY(0.65f);
-//            view.setScaleX(0.7f);
+            view.setScaleY(0.65f);
+            view.setScaleX(0.75f);
 
+            int top = view.getTop();
+            int left = view.getLeft();
+
+            Log.i(TAG, "onLayoutChildren: top:" + top + "left:" + left);
+
+            Rect rect = new Rect();
+
+            view.getHitRect(rect);
+
+            Log.i(TAG, "onLayoutChildren: top:" + rect.top + ",,left:" + rect.left);
+
+            view.getDrawingRect(rect);
+
+            Log.i(TAG, "onLayoutChildren: top::" + rect.top + "left::" + rect.left);
+
+            Log.i(TAG, "onLayoutChildren: HEIGHT" + DistanceUtil.getDisplayMetrics().widthPixels);
         }
     }
 

@@ -19,6 +19,7 @@ import com.example.headerlistview.ui.fragment.CircleFragment;
 import com.example.headerlistview.ui.fragment.RecommendFragment;
 import com.example.headerlistview.ui.fragment.ShoppingFragment;
 import com.example.headerlistview.ui.fragment.VideoFragment;
+import com.example.headerlistview.ui.widget.MyPager;
 import com.example.headerlistview.util.GlobalUtil;
 import com.example.headerlistview.util.MainTabPagerTitleView;
 import com.example.headerlistview.util.SystemUtil;
@@ -48,11 +49,16 @@ public class MainListAdapter extends BaseAdapter implements ViewPager.OnPageChan
     private MagicIndicator magic_faketab;
     private MagicIndicator magic_realtab;
 
+    public MyPager pager;
+
+    public RecommendFragment recommendFragment;
+
     public MainListAdapter(FragmentManager manager, int topHeight, MagicIndicator magic_faketab, MagicIndicator magic_realtab) {
         this.manager = manager;
         this.topHeight = topHeight;
         this.magic_faketab = magic_faketab;
         this.magic_realtab = magic_realtab;
+        recommendFragment = new RecommendFragment();
     }
 
     @Override
@@ -82,7 +88,7 @@ public class MainListAdapter extends BaseAdapter implements ViewPager.OnPageChan
 
         convertView = View.inflate(context, R.layout.item_main, null);
 
-        ViewPager pager = convertView.findViewById(R.id.pager_main);
+        pager = convertView.findViewById(R.id.pager_main);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, pagerHeight);
         pager.setLayoutParams(layoutParams);
 
@@ -91,7 +97,7 @@ public class MainListAdapter extends BaseAdapter implements ViewPager.OnPageChan
             public Fragment getItem(int position) {
                 switch (position) {
                     case 0:
-                        return new RecommendFragment();
+                        return recommendFragment;
                     case 1:
                         return new VideoFragment();
                     case 2:

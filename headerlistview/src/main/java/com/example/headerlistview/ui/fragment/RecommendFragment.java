@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.headerlistview.adapter.main.MainRecommendAdapter;
+import com.example.headerlistview.ui.widget.ItemList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,20 +23,22 @@ import java.util.List;
 
 public class RecommendFragment extends BaseFragment {
 
-    private ListView listView;
     private List<String> data = new ArrayList<>();
     private MainRecommendAdapter adapter;
+
+    public ItemList list;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         adapter = new MainRecommendAdapter(data);
 
-        listView = new ListView(getActivity());
-        listView.setDivider(null);
-        listView.setScrollBarSize(0);
-        listView.setAdapter(adapter);
+        list = new ItemList(getActivity());
+        list.setDivider(null);
+        list.setScrollBarSize(0);
+        list.setAdapter(adapter);
 
-        return listView;
+        return list;
     }
+
 }

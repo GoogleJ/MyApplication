@@ -38,19 +38,24 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TabAdapter.ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final TabAdapter.ViewHolder viewHolder, final int i) {
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (bind2Mian != null) {
-                    bind2Mian.onChangeFragment(i);
+                    bind2Mian.onChangeFragment(viewHolder.getAdapterPosition());
                 }
             }
         });
 
         View view = TabManager.fragments.get(i).getView();
-        Bitmap capture = capture(view, DistanceUtil.getDisplayMetrics().widthPixels, DistanceUtil.getDisplayMetrics().heightPixels, Bitmap.Config.RGB_565);
-        viewHolder.iv_tab_thumbnail.setImageBitmap(capture);
+        if (view != null) {
+            Bitmap capture = capture(view, DistanceUtil.getDisplayMetrics().widthPixels, DistanceUtil.getDisplayMetrics().heightPixels, Bitmap.Config.RGB_565);
+            viewHolder.iv_tab_thumbnail.setImageBitmap(capture);
+        } else {
+            Log.i(TAG, "onBindViewHolder: " + "Default");
+            viewHolder.iv_tab_thumbnail.setImageBitmap(TabManager.defauleMainCapture);
+        }
     }
 
     @Override
@@ -92,5 +97,9 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         canvas.setBitmap(null);
 
         return bitmap;
+    }
+
+    public void onDismiss(int position) {
+        notifyItemRemoved(position);
     }
 }

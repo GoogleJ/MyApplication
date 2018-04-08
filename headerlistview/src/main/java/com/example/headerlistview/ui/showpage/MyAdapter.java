@@ -13,8 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ConvertUtils;
-import com.blankj.utilcode.util.DeviceUtils;
-import com.blankj.utilcode.util.ScreenUtils;
+import com.example.headerlistview.APP;
 import com.example.headerlistview.R;
 
 import java.util.Collections;
@@ -42,8 +41,8 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements 
 
     private List<View> data;
 
-    public MyAdapter(List<View> data) {
-        this.data = data;
+    public MyAdapter() {
+        this.data = APP.pages;
     }
 
     @Override
@@ -61,7 +60,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements 
         myViewHolder.tv_item_sitetitle.setText(s + i);
 
         View view = data.get(i);
-        Bitmap capture = capture(view, ConvertUtils.dp2px(144), ConvertUtils.dp2px(256), false, Bitmap.Config.RGB_565);
+        Bitmap capture = capture(view, ConvertUtils.dp2px(388), ConvertUtils.dp2px(502), Bitmap.Config.RGB_565);
         myViewHolder.iv_item_thumbnail.setImageBitmap(capture);
     }
 
@@ -85,7 +84,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements 
         }
     }
 
-    public static Bitmap capture(View view, float width, float height, boolean scroll, Bitmap.Config config) {
+    private Bitmap capture(View view, float width, float height, Bitmap.Config config) {
         if (!view.isDrawingCacheEnabled()) {
             view.setDrawingCacheEnabled(true);
         }
@@ -96,10 +95,10 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements 
         Canvas canvas = new Canvas(bitmap);
         int left = view.getLeft();
         int top = view.getTop();
-        if (scroll) {
-            left = view.getScrollX();
-            top = view.getScrollY();
-        }
+//        if (scroll) {
+//            left = view.getScrollX();
+//            top = view.getScrollY();
+//        }
         int status = canvas.save();
         canvas.translate(-left, -top);
 
@@ -112,10 +111,10 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements 
         Paint alphaPaint = new Paint();
         alphaPaint.setColor(Color.TRANSPARENT);
 
-        canvas.drawRect(0f, 0f, 1f, height, alphaPaint);
-        canvas.drawRect(width - 1f, 0f, width, height, alphaPaint);
-        canvas.drawRect(0f, 0f, width, 1f, alphaPaint);
-        canvas.drawRect(0f, height - 1f, width, height, alphaPaint);
+//        canvas.drawRect(0f, 0f, 1f, height, alphaPaint);
+//        canvas.drawRect(width - 1f, 0f, width, height, alphaPaint);
+//        canvas.drawRect(0f, 0f, width, 1f, alphaPaint);
+//        canvas.drawRect(0f, height - 1f, width, height, alphaPaint);
         canvas.setBitmap(null);
 
         return bitmap;

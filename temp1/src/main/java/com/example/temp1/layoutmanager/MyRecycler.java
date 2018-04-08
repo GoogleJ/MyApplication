@@ -1,5 +1,6 @@
 package com.example.temp1.layoutmanager;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +25,7 @@ public class MyRecycler extends RecyclerView{
 
     @Override
     public boolean fling(int velocityX, int velocityY) {
+
         return super.fling(velocityX, (int) (velocityY * 0.6));
     }
 }

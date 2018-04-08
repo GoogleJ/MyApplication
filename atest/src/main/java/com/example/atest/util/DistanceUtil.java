@@ -2,7 +2,10 @@ package com.example.atest.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Point;
 import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.WindowManager;
 
 /**
  * Created by Administrator on 2018/1/29.
@@ -10,6 +13,14 @@ import android.util.DisplayMetrics;
 
 public class DistanceUtil {
     private static Context context;
+
+    public static Point getRealScreenSize() {
+        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = manager.getDefaultDisplay();
+        Point realSize = new Point();
+        display.getRealSize(realSize);
+        return realSize;
+    }
 
     public static int getStatusBarHeight() {
         int statusBarHeight1 = 0;

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 /**
  * Created by Administrator on 2018/2/2.
@@ -13,6 +14,10 @@ import android.view.ViewGroup;
 
 public class BaseFragment extends Fragment {
     private boolean initData;
+
+    public ListView listView;
+
+    public int listHeight;
 
     @Nullable
     @Override

@@ -1,5 +1,9 @@
 package com.example.atest;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -9,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -43,14 +48,22 @@ public class MainActivity extends AppCompatActivity implements TabAdapter.Bind2M
 
         initView();
 
-        MainPageFragment fragment = new MainPageFragment();
+        final MainPageFragment fragment = new MainPageFragment();
         TabManager.fragments.add(fragment);
-        manager.beginTransaction().replace(R.id.main_container, fragment).commit();
+        manager.beginTransaction().add(R.id.main_container, fragment).commit();
+        fragment.setOnCreateViewFinish(new MainPageFragment.onCreateViewFinish() {
+            @Override
+            public void onFinish() {
+                Bitmap capture = tabAdapter.capture(fragment.root, DistanceUtil.getDisplayMetrics().widthPixels, DistanceUtil.getDisplayMetrics().heightPixels, Bitmap.Config.RGB_565);
+                TabManager.defauleMainCapture = capture;
+            }
+        });
     }
 
     private void initView() {
         touchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.DOWN | ItemTouchHelper.UP,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder viewHolder1) {
                 return false;
@@ -58,20 +71,49 @@ public class MainActivity extends AppCompatActivity implements TabAdapter.Bind2M
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
-//                adapter.onDismiss(viewHolder.getAdapterPosition());
+                int position = viewHolder.getAdapterPosition();
+                manager.beginTransaction().remove(TabManager.fragments.get(viewHolder.getAdapterPosition())).commit();
+
+                if (position == TabManager.currentTab) {
+                    TabManager.currentTab = 0;
+                } else if (TabManager.currentTab < position) {
+
+                } else {
+                    TabManager.currentTab -= 1;
                 }
+
+                TabManager.fragments.remove(position);
+
+                if (TabManager.fragments.size() != 0) {
+                    Fragment currentTab = TabManager.getCurrentTab();
+                    if (currentTab != null) {
+                        manager.beginTransaction().show(currentTab).commit();
+                    }
+                    tabAdapter.onDismiss(viewHolder.getAdapterPosition());
+                } else {
+                    addTab(null);
+                }
+            }
 
             private int screenWidth = DistanceUtil.getDisplayMetrics().widthPixels;
 
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-//                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-//                View itemView = viewHolder.itemView;
-//                float v = Math.abs(dX) / screenWidth;
-//                itemView.setAlpha(1 - v);
-//                itemView.setRotation(15 * (dX / (screenWidth / 2)));
-//                itemView.setTranslationX(dX);
-//                itemView.setTranslationY(Math.abs(dX) / 2);
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                View itemView = viewHolder.itemView;
+                float v = Math.abs(dX) / screenWidth;
+                itemView.setAlpha(1 - v);
+                itemView.setRotation(15 * (dX / (screenWidth / 2)));
+                itemView.setTranslationX(dX);
+                itemView.setTranslationY(Math.abs(dX) / 2);
+            }
+
+            @Override
+            public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                super.clearView(recyclerView, viewHolder);
+                View itemView = viewHolder.itemView;
+                itemView.setAlpha(1);
+                itemView.setRotation(0);
             }
         });
 
@@ -119,13 +161,23 @@ public class MainActivity extends AppCompatActivity implements TabAdapter.Bind2M
     public void addTab(View view) {
         MainPageFragment fragment = new MainPageFragment();
         TabManager.fragments.add(fragment);
-        manager.beginTransaction().replace(R.id.main_container, fragment).commit();
+
         ll_main_front.setVisibility(View.VISIBLE);
         ll_main_back.setVisibility(View.INVISIBLE);
-        tabAdapter.notifyItemInserted(TabManager.fragments.size() - 1);
-        TabManager.currentTab = TabManager.fragments.size() - 1;
 
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(ll_main_front, "translationY", DistanceUtil.getRealScreenSize().y, 0);
+        objectAnimator.setDuration(400);
+
+        manager.beginTransaction().add(R.id.main_container, fragment).commit();
+        if (TabManager.fragments.size() != 1) {
+            manager.beginTransaction().hide(TabManager.getCurrentTab()).commit();
+        }
+
+        TabManager.currentTab = TabManager.fragments.size() - 1;
         tv_main_tabcount.setText("" + TabManager.fragments.size());
+        tabAdapter.notifyItemInserted(TabManager.fragments.size() - 1);
+
+        objectAnimator.start();
     }
 
     @Override
@@ -135,12 +187,12 @@ public class MainActivity extends AppCompatActivity implements TabAdapter.Bind2M
     }
 
     @Override
-
     public void onChangeFragment(int position) {
-        manager.beginTransaction().replace(R.id.main_container, TabManager.fragments.get(position)).commit();
-        TabManager.currentTab = position;
-
-        ll_main_back.setVisibility(View.INVISIBLE);
-        ll_main_front.setVisibility(View.VISIBLE);
+        if (position != TabManager.currentTab) {
+            manager.beginTransaction().show(TabManager.fragments.get(position)).commit();
+            manager.beginTransaction().hide(TabManager.getCurrentTab()).commit();
+            TabManager.currentTab = position;
+        }
+        hideTab(null);
     }
 }

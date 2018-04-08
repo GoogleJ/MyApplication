@@ -1,12 +1,16 @@
 package com.example.temp1;
 
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -20,8 +24,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView tv_test;
-
-    private LinearLayout ll_root;
 
     private RecyclerView recyclerview;
 
@@ -37,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.show_pages);
 
         tv_test = findViewById(R.id.tv_test);
-
-        ll_root = findViewById(R.id.ll_root);
 
         recyclerview = findViewById(R.id.recyclerview);
 
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addPage(View view) {
-        Snackbar.make(ll_root, "addPage", Snackbar.LENGTH_SHORT)
+        Snackbar.make(view, "addPage", Snackbar.LENGTH_SHORT)
                 .setAction("hide", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -108,11 +108,55 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
+    private int tempPosition = 1;
+
+    private boolean scaleFlag;
+    private int top = -1;
+
     public void select(View view) {
-//        Drawable drawable = tv_test.getDrawable();
-//        if (drawable instanceof Animatable) {
-//            ((Animatable) drawable).start();
-//        }
+        View childAt = recyclerview.getChildAt(tempPosition);
+
+        int width = childAt.getWidth();
+        int height = childAt.getHeight();
+
+        Resources resources = MainActivity.this.getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        int statusBarHeight = resources.getDimensionPixelSize(resourceId);
+
+        int screenWidth = ScreenUtils.getScreenWidth();
+        int screenHeight = ScreenUtils.getScreenHeight() - statusBarHeight;
+
+        float scaleX = (float) screenWidth / width;
+
+        float scaleY = (float) screenHeight / height;
+
+        Log.e("scaleX", scaleX + "");
+        Log.e("scaleY", scaleY + "");
+
+        if (scaleFlag) {
+            ViewPropertyAnimator animate = childAt.animate();
+            animate.scaleX(1f);
+            animate.scaleY(1f);
+            animate.translationYBy(top - statusBarHeight);
+            animate.setDuration(300);
+            animate.start();
+        } else {
+            childAt.setScaleX(scaleX);
+            childAt.setScaleY(scaleY);
+
+            if (top == -1) {
+                top = childAt.getTop();
+            }
+
+            childAt.setTop(statusBarHeight);
+
+            int height1 = childAt.getHeight();
+            Log.e("after", height1 + "");
+            Log.e("screen", ScreenUtils.getScreenHeight() + "");
+        }
+
+        scaleFlag = !scaleFlag;
+
     }
 
     public void more(View view) {

@@ -13,22 +13,26 @@ import com.example.atest.R;
 import static android.content.ContentValues.TAG;
 
 public class MainPageFragment extends Fragment {
+    public View root;
+
+    public interface onCreateViewFinish {
+        void onFinish();
+    }
+
+    private onCreateViewFinish onCreateViewFinish;
+
+    public void setOnCreateViewFinish(onCreateViewFinish onCreateViewFinish) {
+        this.onCreateViewFinish = onCreateViewFinish;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return View.inflate(container.getContext(), R.layout.layout_mainpagefragment, null);
-    }
+        root = View.inflate(container.getContext(), R.layout.layout_mainpagefragment, null);
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Log.i(TAG, "onViewStateRestored: " + "saveState!");
-    }
-
-    @Override
-    public void onViewStateRestored(Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        Log.i(TAG, "onViewStateRestored: " + "restore!");
+        if (onCreateViewFinish != null) {
+            onCreateViewFinish.onFinish();
+        }
+        return root;
     }
 }

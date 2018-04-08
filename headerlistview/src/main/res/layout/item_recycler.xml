@@ -52,7 +52,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="6dp"
-            android:background="@drawable/shape_temp1" />
+            android:background="@drawable/shape_temp1"
+            android:padding="0.1dp"
+            android:scaleType="fitXY" />
 
     </LinearLayout>
 

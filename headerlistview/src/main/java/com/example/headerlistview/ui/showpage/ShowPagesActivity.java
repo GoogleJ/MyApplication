@@ -16,8 +16,6 @@ import com.example.headerlistview.APP;
 import com.example.headerlistview.R;
 import com.example.headerlistview.ui.MainActivity;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShowPagesActivity extends AppCompatActivity {
     private LinearLayout ll_root;
@@ -27,8 +25,6 @@ public class ShowPagesActivity extends AppCompatActivity {
     private TextView tv_showpages_pages;
 
     private MyAdapter adapter;
-
-    private List<String> data;
 
     private ItemTouchHelper touchHelper;
 
@@ -43,7 +39,7 @@ public class ShowPagesActivity extends AppCompatActivity {
 
         recyclerview = findViewById(R.id.recyclerview);
 
-        adapter = new MyAdapter(APP.pages);
+        adapter = new MyAdapter();
 
         recyclerview.setAdapter(adapter);
 

@@ -94,11 +94,9 @@ public class OverLayCardLayoutManager extends RecyclerView.LayoutManager {
         //重新获取itemcount并计算可滑动的距离
         itemCount = getItemCount();
         totalScroll = itemGap * (itemCount - 1);
-//        totalScroll = itemGap * (itemCount - 1) - 3 * overLapGap; 堆叠效果
+//        totalScroll = itemGap * (itemCount - 1) - overLapCount * overLapGap; 堆叠效果
 
-        //如果没有item，直接返回
         if (itemCount <= 0) return;
-        // 跳过preLayout，preLayout主要用于支持动画
         if (state.isPreLayout()) {
             return;
         }
@@ -119,7 +117,7 @@ public class OverLayCardLayoutManager extends RecyclerView.LayoutManager {
             int widthSpace = getWidth() - getDecoratedMeasuredWidth(view);
 
             if (viewHeight == 0) {
-                viewHeight = getDecoratedMeasurementVertical(view);
+                viewHeight = getDecoratedMeasuredHeight(view);
             }
 
             offsetY = itemGap * i;

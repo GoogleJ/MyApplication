@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#14181C"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/temptest"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/ic_mainbac"
+        android:clickable="true"
+        android:onClick="jumpTo" />
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/recyclerview"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1" />-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:background="#000000">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:onClick="back"
+            android:src="@drawable/ic_back" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:onClick="add"
+            android:src="@drawable/ic_add" />
+
+        <RelativeLayout
+            android:id="@+id/rl_mask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+
+            <!--<RelativeLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="8dp">-->
+
+            <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:src="@drawable/ic_square" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/tv_switcher_pagecount"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:text="1"-->
+            <!--android:textColor="#2c2c2c"-->
+            <!--android:textSize="13sp"-->
+            <!--android:textStyle="bold" />-->
+
+            <!--</RelativeLayout>-->
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -9,10 +9,14 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/HenCoderPractice1" />
+            <option value="$PROJECT_DIR$/atest" />
             <option value="$PROJECT_DIR$/fileprovider" />
+            <option value="$PROJECT_DIR$/fragment" />
             <option value="$PROJECT_DIR$/headerlistview" />
             <option value="$PROJECT_DIR$/magicindicator" />
+            <option value="$PROJECT_DIR$/recyclerdemo" />
             <option value="$PROJECT_DIR$/rxJavaExamples" />
+            <option value="$PROJECT_DIR$/temp" />
             <option value="$PROJECT_DIR$/temp1" />
           </set>
         </option>

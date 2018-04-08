@@ -1,1 +1,1 @@
-include ':fileprovider', ':headerlistview', ':temp1', 'HenCoderPractice1', 'rxJavaExamples', ':magicindicator'
+include ':fileprovider', ':headerlistview', ':temp1', ':recyclerdemo', ':fragment', ':temp', ':atest', 'HenCoderPractice1', 'rxJavaExamples', ':magicindicator'
